@@ -1,0 +1,49 @@
+{
+    "analysis_responses": [
+        {
+            "id": "mr12345",
+            "text": "Acute bronchitis case with fever",
+            "predictions": [
+                {
+                    "disease": "Respiratory",
+                    "confidence": 0.89,
+                    "severity": "Medium",
+                    "symptoms": ["cough", "fever", "rhonchi"]
+                },
+                {
+                    "disease": "Infectious",
+                    "confidence": 0.65,
+                    "severity": "Low",
+                    "symptoms": ["fever", "elevated WBC"]
+                }
+            ],
+            "recommendations": [
+                {
+                    "category": "Medical",
+                    "items": [
+                        "Complete prescribed antibiotic course",
+                        "Rest and adequate hydration",
+                        "Monitor temperature",
+                        "Use prescribed bronchodilator"
+                    ]
+                },
+                {
+                    "category": "Tests",
+                    "items": [
+                        "Follow-up chest X-ray if symptoms persist",
+                        "Sputum culture if no improvement",
+                        "Monitor CRP levels"
+                    ]
+                },
+                {
+                    "category": "Lifestyle",
+                    "items": [
+                        "Avoid exposure to cold",
+                        "Steam inhalation twice daily",
+                        "Quit smoking if applicable"
+                    ]
+                }
+            ]
+        }
+    ]
+}

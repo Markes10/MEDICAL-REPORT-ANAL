@@ -1,0 +1,325 @@
+# Application Configuration
+app:
+  name: "Medical Report Analyzer"
+  version: "1.0.0"
+  environment: "development"
+  debug: true
+  host: "0.0.0.0"
+  port: 8000 
+  timezone: "UTC"
+  max_workers: 4
+  graceful_shutdown_timeout: 30
+
+# Service Configuration
+services:
+  ocr:
+    tesseract_path: "C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
+    language: "eng"
+    config_params: "--psm 3"
+    dpi: 300
+    timeout: 30
+    parallel_processing: true
+    max_concurrent_jobs: 3
+    quality_threshold: 0.8
+    preprocessing:
+      noise_reduction: true
+      contrast_enhancement: true
+      deskew: true
+
+  llm:
+    model_name: "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext"
+    max_tokens: 500
+    temperature: 0.7
+    timeout: 60
+    cache_enabled: true
+    cache_ttl: 3600
+    batch_size: 8
+    use_gpu: true
+    model_precision: "fp16"
+    openai:
+      model: "gpt-3.5-turbo"
+      max_tokens: 1000
+      temperature: 0.3
+      frequency_penalty: 0.0
+      presence_penalty: 0.0
+
+  embedding:
+    model: "sentence-transformers/all-MiniLM-L6-v2"
+    dimension: 384
+    similarity_threshold: 0.75
+
+# Document Processing
+document:
+  max_file_size: 10485760  # 10MB in bytes
+  supported_formats:
+   - ".pdf"
+   - ".jpg"
+   - ".jpeg"
+   - ".png"
+   - ".tiff"
+   - ".bmp"
+   - ".txt"
+   - ".docx"
+   - ".rtf"
+  temp_dir: "./temp"
+  cleanup_interval: 3600
+  virus_scan_enabled: true
+  text_extraction:
+    min_confidence: 0.6
+    preserve_formatting: true
+    extract_tables: true
+    extract_images: true
+  pdf_processing:
+    max_pages: 50
+    extract_metadata: true
+    password_protected: false
+
+# Disease Classification
+classification:
+  confidence_threshold: 0.5
+  max_predictions: 5
+  min_text_length: 50
+  use_ensemble: true
+  models:
+    - name: "bert_classifier"
+      weight: 0.4
+    - name: "random_forest"
+      weight: 0.3
+    - name: "svm_classifier"
+      weight: 0.3
+  categories:
+    - "Cardiovascular"
+    - "Respiratory"
+    - "Gastrointestinal"
+    - "Neurological"
+    - "Musculoskeletal"
+    - "Endocrine"
+    - "Infectious"
+    - "Dermatological"
+    - "Psychological"
+    - "Oncological"
+    - "Hematological"
+    - "Immunological"
+    - "Genetic"
+    - "Emergency"
+  severity_levels:
+    - "Critical"
+    - "High"
+    - "Medium"
+    - "Low"
+    - "Informational"
+# Medical Analysis
+medical_analysis:
+  extract_vitals: true
+  extract_medications: true
+  extract_allergies: true
+  extract_procedures: true
+  extract_lab_results: true
+  drug_interaction_check: true
+  reference_ranges:
+    enabled: true
+    source: "mayo_clinic"
+  icd10_mapping: true
+  medical_terminology:
+    expand_abbreviations: true
+    normalize_terms: true 
+# Recommendations Engine
+recommendations:
+  enabled: true
+  max_suggestions: 10
+  confidence_threshold: 0.6
+  types:
+    - "diagnostic_tests"
+    - "specialist_referrals"
+    - "lifestyle_modifications"
+    - "medication_adjustments"
+    - "follow_up_appointments"
+  personalization:
+    consider_age: true
+    consider_gender: true
+    consider_medical_history: true
+    consider_current_medications: true
+# Data Validation
+validation:
+  strict_mode: false
+  medical_term_validation: true
+  date_format_validation: true
+  numeric_range_validation: true
+  required_fields:
+    - "patient_id"
+    - "report_date"
+    - "report_type" 
+# Database Configuration
+database:
+  primary:
+    url: "sqlite:///./medical_reports.db"
+    pool_size: 10
+    max_overflow: 20
+    echo: false
+    encryption_enabled: false
+  backup:
+    enabled: true
+    interval: 86400  # 24 hours
+    retention_days: 30
+    location: "./backups"
+  migrations:
+    auto_upgrade: false
+    version_table: "alembic_version"
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/medical_analyzer.log"
+  max_size: 10485760  # 10MB
+  backup_count: 5
+  rotation: "time"
+  when: "midnight"
+  structured_logging: true
+  sensitive_data_masking: true
+  audit_logging:
+    enabled: true
+    file: "logs/audit.log"
+    events:
+      - "user_login"
+      - "report_upload"
+      - "report_analysis"
+      - "data_export"
+
+
+# Security
+security:
+  ssl_enabled: false
+  ssl_cert_path: ""
+  ssl_key_path: ""
+  cors_origins: ["*"]
+  cors_methods: ["GET", "POST", "PUT", "DELETE"]
+  cors_headers: ["*"]
+  api_key_required: true
+  jwt_secret: "your-jwt-secret-here"
+  jwt_expiry_hours: 24
+  password_policy:
+    min_length: 8
+    require_uppercase: true
+    require_lowercase: true
+    require_numbers: true
+    require_special_chars: true
+  rate_limit:
+    requests: 100
+    period: 3600
+    per_ip: true
+  session:
+    timeout: 1800  # 30 minutes
+    secure_cookies: true
+  data_encryption:
+    algorithm: "AES-256-GCM"
+    key_rotation_days: 90
+  hipaa_compliance:
+    enabled: true
+    audit_trail: true
+    data_anonymization: true
+    access_controls: true
+# Cache Configuration
+cache:
+  enabled: true
+  type: "redis"
+  url: "redis://localhost:6379"
+  ttl: 3600
+  max_memory: "100mb"
+  eviction_policy: "allkeys-lru"
+  cluster_mode: false
+  ssl_enabled: false
+  password: ""
+  db: 0
+
+# Storage
+storage:
+  type: "local"
+  path: "./storage"
+  max_size: 1073741824  # 1GB
+  cleanup_threshold: 0.9 # 90% of max size 
+  backup_enabled: true
+  compression_enabled: true
+  encryption_enabled: false
+  retention_policy:
+    default_days: 365
+    sensitive_data_days: 90
+    temp_files_hours: 24 
+# Monitoring & Health Checks
+monitoring:
+  enabled: true
+  metrics:
+    prometheus_enabled: false
+    custom_metrics: true
+    performance_tracking: true
+  health_checks:
+    database: true
+    redis: true
+    external_apis: true
+    disk_space: true
+    memory_usage: true
+  alerts:
+    email_enabled: false
+    webhook_enabled: false
+    thresholds:
+      cpu_usage: 80
+      memory_usage: 85
+      disk_usage: 90
+      error_rate: 5
+
+# API Configuration
+api:
+  version: "v1"
+  documentation:
+    enabled: true
+    title: "Medical Report Analyzer API"
+    description: "AI-powered medical report analysis and insights"
+  pagination:
+    default_limit: 20
+    max_limit: 100
+  versioning:
+    strategy: "header"  # or "url"
+  request_validation: true
+  response_compression: true
+
+# Feature Flags
+features:
+  experimental_nlp: false
+  advanced_analytics: true
+  batch_processing: true
+  real_time_analysis: false
+  multi_language_support: false
+  integration_apis:
+    fhir_enabled: false
+    hl7_enabled: false
+  ai_explanations: true
+  confidence_scoring: true
+
+# Performance
+performance:
+  async_processing: true
+  queue_enabled: true
+  worker_processes: 4
+  max_concurrent_requests: 100
+  request_timeout: 300
+  connection_timeout: 30
+  keep_alive_timeout: 5
+
+# Localization
+localization:
+  default_language: "en"
+  supported_languages:
+    - "en"
+    - "es"
+    - "fr"
+    - "de"
+  timezone_support: true
+  date_format: "YYYY-MM-DD"
+  time_format: "HH:mm:ss"
+
+# Development
+development:
+  hot_reload: true
+  debug_endpoints: true
+  mock_services: false
+  test_data_enabled: false
+  profiling_enabled: false

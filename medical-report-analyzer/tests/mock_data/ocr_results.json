@@ -1,0 +1,37 @@
+{
+    "ocr_results": [
+        {
+            "file_name": "sample_report.jpg",
+            "metadata": {
+                "format": "jpg",
+                "dpi": 300,
+                "size": "2480x3508"
+            },
+            "confidence": 0.95,
+            "processing_time": "1.2s",
+            "extracted_text": "Medical Report\nDate: 2025-06-14\nPatient ID: MR12345\n\nCHIEF COMPLAINT:\nPatient presents with persistent cough and fever for the past 5 days.\n\nVITAL SIGNS:\n- Blood Pressure: 120/80 mmHg\n- Temperature: 38.5°C\n- Pulse: 88/min\n- SpO2: 97%",
+            "detected_fields": {
+                "date": "2025-06-14",
+                "patient_id": "MR12345",
+                "vital_signs": {
+                    "blood_pressure": "120/80",
+                    "temperature": "38.5",
+                    "pulse": "88",
+                    "spo2": "97"
+                }
+            },
+            "sections": [
+                {
+                    "title": "CHIEF COMPLAINT",
+                    "content": "Patient presents with persistent cough and fever for the past 5 days.",
+                    "confidence": 0.98
+                },
+                {
+                    "title": "VITAL SIGNS",
+                    "content": "Blood Pressure: 120/80 mmHg\nTemperature: 38.5°C\nPulse: 88/min\nSpO2: 97%",
+                    "confidence": 0.96
+                }
+            ]
+        }
+    ]
+}

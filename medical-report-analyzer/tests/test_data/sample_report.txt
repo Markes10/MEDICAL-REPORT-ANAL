@@ -1,0 +1,30 @@
+Medical Report
+Date: 2025-06-14
+Patient ID: MR12345
+
+CHIEF COMPLAINT:
+Patient presents with persistent cough and fever for the past 5 days.
+
+VITAL SIGNS:
+- Blood Pressure: 120/80 mmHg
+- Temperature: 38.5°C
+- Pulse: 88/min
+- SpO2: 97%
+
+PHYSICAL EXAMINATION:
+- Chest: Scattered rhonchi in both lung fields
+- Heart: Regular rhythm, no murmurs
+- Abdomen: Soft, non-tender
+
+LABORATORY RESULTS:
+- WBC: 11,000/μL
+- CRP: 15 mg/L
+- Chest X-ray: Mild bronchial wall thickening
+
+ASSESSMENT:
+Acute bronchitis with possible viral infection
+
+PLAN:
+1. Prescribed antibiotic course
+2. Symptomatic treatment
+3. Follow-up in 1 week
