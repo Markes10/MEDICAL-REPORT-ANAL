@@ -1,4 +1,4 @@
-# MEDICAL-REPORT-ANAL 
+# MEDICAL-REPORT-ANALYZER
 AI Medical Report Analyzer
 https://www.python.org/downloads/
 https://fastapi.tiangolo.com
